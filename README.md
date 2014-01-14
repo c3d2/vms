@@ -9,6 +9,10 @@ cabal configure && cabal build &&
 
 ```shell
 sudo -i -u postgres
-createuser -W matemat
+createuser matemat
 createdb  -O matemat matemat
+psql
+```
+```sql
+alter role "matemat" with encrypted password '1234';
 ```
