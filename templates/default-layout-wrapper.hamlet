@@ -17,6 +17,12 @@ $newline never
     <body>
         <div class="container">
             <header>
+              <h1>Vorratsmatenspeicherung
+              <div #authId>
+                $maybe uid <- maid
+                  Hello, #{show uid}
+                $nothing
+                  Please log in!
             <div id="main" role="main">
               ^{pageBody pc}
             <footer>
