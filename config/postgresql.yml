@@ -1,9 +1,9 @@
 Default: &defaults
-  user: PROJECTNAME
-  password: PROJECTNAME
-  host: localhost
+  user: matemat
+  password: "1234"
+  host: astrom.hq.c3d2.de
   port: 5432
-  database: PROJECTNAME
+  database: matemat
   poolsize: 10
 
 Development:
