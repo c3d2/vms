@@ -5,3 +5,7 @@
 /robots.txt RobotsR GET
 
 / HomeR GET POST
+
+/buy BuyR GET
+
+/stock StockR GET
