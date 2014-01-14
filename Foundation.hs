@@ -86,6 +86,7 @@ instance Yesod App where
     authRoute _ = Just HomeR
 
     isAuthorized HomeR _ = return Authorized
+    isAuthorized SignupR _ = return Authorized
     isAuthorized _ _ = return AuthenticationRequired
 
     -- This function creates static content files in the static folder
