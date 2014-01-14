@@ -1,6 +1,7 @@
 ## Building
 
 ```shell
+cabal install --only-dependencies &&
 cabal configure && cabal build &&
 ./dist/build/vms/vms
 ```
