@@ -8,4 +8,5 @@
 
 /buy BuyR GET
 
-/stock StockR GET
+/stock StockR GET POST
+/stock/#StockId ProductR GET POST
