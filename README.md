@@ -4,7 +4,7 @@
 export PATH=~/.cabal/bin:$PATH
 cabal install --only-dependencies &&
 cabal configure && cabal build &&
-./dist/build/vms/vms
+./dist/build/vms/vms Development
 ```
 
 ## Database
