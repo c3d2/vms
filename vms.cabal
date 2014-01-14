@@ -1,4 +1,5 @@
-name:              PROJECTNAME
+name:              vms
+description:       Vorratsmatenspeicherung
 version:           0.0.0
 cabal-version:     >= 1.8
 build-type:        Simple
@@ -71,14 +72,14 @@ library
                  , fast-logger                   >= 2.1        && < 2.2
                  , wai-logger                    >= 2.1        && < 2.2
 
-executable         PROJECTNAME
+executable         vms
     if flag(library-only)
         Buildable: False
 
     main-is:           main.hs
     hs-source-dirs:    app
     build-depends:     base
-                     , PROJECTNAME
+                     , vms
                      , yesod
 
     ghc-options:       -threaded -O2
@@ -90,7 +91,7 @@ test-suite test
     ghc-options:       -Wall
 
     build-depends: base
-                 , PROJECTNAME
+                 , vms
                  , yesod-test >= 1.2 && < 1.3
                  , yesod-core
                  , yesod
