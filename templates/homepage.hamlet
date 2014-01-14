@@ -2,5 +2,9 @@
 
 <ul>
     $forall Entity id user <- users
-        <li><form method=POST action=@{HomeR}>
-            <button>#{userIdent user}
+        <li>
+            <form method=POST action=@{HomeR}>
+                <input type=submit name="uid" value=#{userIdent user}>
+    <li>
+        <form method=GET action=@{SignupR}>
+            <input type=submit value="Sign up">

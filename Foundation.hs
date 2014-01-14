@@ -17,6 +17,7 @@ import Model
 import Text.Jasmine (minifym)
 import Text.Hamlet (hamletFile)
 import Yesod.Core.Types (Logger)
+import Data.Text (Text)
 
 -- | The site argument for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -82,7 +83,10 @@ instance Yesod App where
     urlRenderOverride _ _ = Nothing
 
     -- The page to be redirected to when authentication is required.
-    authRoute _ = Just $ AuthR LoginR
+    authRoute _ = Just HomeR
+
+    isAuthorized HomeR _ = return Authorized
+    isAuthorized _ _ = return AuthenticationRequired
 
     -- This function creates static content files in the static folder
     -- and names them based on a hash of their content. This allows
@@ -131,6 +135,13 @@ instance YesodAuth App where
     authPlugins _ = []
 
     authHttpManager = httpManager
+
+    -- FIXME: is that really Key, not UserId Text Something?
+    maybeAuthId = fmap (Key . PersistText) `fmap` lookupSession "_ID"
+
+-- TODO: check if user exists
+login :: MonadHandler m => Text -> m ()
+login = setSession "_ID"
 
 -- This instance is required to use forms. You can modify renderMessage to
 -- achieve customized and internationalized form validation messages.

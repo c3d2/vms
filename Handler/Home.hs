@@ -18,4 +18,11 @@ getHomeR = do
         $(widgetFile "homepage")
 
 postHomeR :: Handler Html
-postHomeR = undefined
+postHomeR = 
+    lookupPostParam "uid" >>=
+    maybe (redirect BuyR)
+    (\uid -> do
+        login uid
+        redirect HomeR
+    )
+    
