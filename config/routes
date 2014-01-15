@@ -8,5 +8,6 @@
 
 /buy BuyR GET
 
-/stock StockR GET POST
-/stock/#StockId ProductR GET POST
+/stock StockR GET
+/stock/!new NewStockR GET POST
+/stock/#StockId UpdateStockR GET POST
