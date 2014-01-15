@@ -4,4 +4,7 @@ module Handler.Buy where
 import Import
 
 getBuyR :: Handler Html
-getBuyR = undefined
+getBuyR = do
+    stocks <- runDB $ selectList [] []
+    defaultLayout $ do
+        $(widgetFile "buy")

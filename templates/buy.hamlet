@@ -1,0 +1,7 @@
+<h2>Buy Consume Die
+
+<ul>
+    $forall Entity id stock <- stocks
+        <li>
+            <form method=POST action=@{BuyR}>
+                <input type=submit name="id" value=#{stockIdent stock}>
