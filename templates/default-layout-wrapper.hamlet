@@ -19,9 +19,10 @@ $newline never
             <header>
               <h1>Vorratsmatenspeicherung
               <div #authId>
-                $maybe uid <- maid
-                  Hello, #{show uid},
-                  <a>Logout</a>
+                $maybe user <- muser
+                  Hello, #{userIdent user}
+                  <form action=@{AuthR LogoutR} method=POST>
+                    <input type=submit value="Logout">
                 $nothing
                   Please log in!
             <div id="main" role="main">

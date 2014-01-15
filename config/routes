@@ -4,6 +4,7 @@
 /robots.txt RobotsR GET
 
 / HomeR GET POST
+/auth AuthR Auth getAuth
 /signup SignupR GET POST
 
 /buy BuyR GET

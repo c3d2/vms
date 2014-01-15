@@ -17,12 +17,14 @@ getHomeR = do
     defaultLayout $ do
         $(widgetFile "homepage")
 
+
+-- TODO: error msg?
 postHomeR :: Handler Html
 postHomeR = 
     lookupPostParam "uid" >>=
-    maybe (redirect BuyR)
+    maybe (redirect HomeR)
     (\uid -> do
         login uid
-        redirect HomeR
+        redirect BuyR
     )
     

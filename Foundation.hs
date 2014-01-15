@@ -61,6 +61,7 @@ instance Yesod App where
         master <- getYesod
         mmsg <- getMessage
         maid <- maybeAuthId
+        muser <- fmap (fmap entityVal) maybeAuth
 
         -- We break up the default layout into two components:
         -- default-layout is the contents of the body tag, and
@@ -85,9 +86,18 @@ instance Yesod App where
     -- The page to be redirected to when authentication is required.
     authRoute _ = Just HomeR
 
-    isAuthorized HomeR _ = return Authorized
-    isAuthorized SignupR _ = return Authorized
-    isAuthorized _ _ = return AuthenticationRequired
+    isAuthorized handler _write = do
+              mUid <- maybeAuthId
+              return $
+                     case mUid of
+                       Just _ ->
+                           -- Logged in
+                           Authorized
+                       Nothing ->
+                           -- Not logged in
+                           if handler `elem` [HomeR, SignupR]
+                           then Authorized
+                           else AuthenticationRequired
 
     -- This function creates static content files in the static folder
     -- and names them based on a hash of their content. This allows
@@ -122,7 +132,7 @@ instance YesodAuth App where
     type AuthId App = UserId
 
     -- Where to send a user after successful login
-    loginDest _ = HomeR
+    loginDest _ = BuyR
     -- Where to send a user after logout
     logoutDest _ = HomeR
 
@@ -137,12 +147,15 @@ instance YesodAuth App where
 
     authHttpManager = httpManager
 
-    -- FIXME: is that really Key, not UserId Text Something?
-    maybeAuthId = fmap (Key . PersistText) `fmap` lookupSession "_ID"
+makeCreds uid =
+    Creds {
+      credsPlugin = "vms",
+      credsIdent = uid,
+      credsExtra = [] }
 
--- TODO: check if user exists
-login :: MonadHandler m => Text -> m ()
-login = setSession "_ID"
+login :: Text -> HandlerT App IO ()
+login =
+  setCreds False . makeCreds
 
 -- This instance is required to use forms. You can modify renderMessage to
 -- achieve customized and internationalized form validation messages.
