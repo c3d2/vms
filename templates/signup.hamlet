@@ -1,0 +1,3 @@
+<form method=POST action=@{SignupR} enctype=#{signupFormEnctype}>
+  ^{signupFormWidget}
+  <input type=submit value=Signup>

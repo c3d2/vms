@@ -20,7 +20,8 @@ $newline never
               <h1>Vorratsmatenspeicherung
               <div #authId>
                 $maybe uid <- maid
-                  Hello, #{show uid}
+                  Hello, #{show uid},
+                  <a>Logout</a>
                 $nothing
                   Please log in!
             <div id="main" role="main">

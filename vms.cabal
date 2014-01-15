@@ -21,6 +21,7 @@ library
                      Settings.StaticFiles
                      Settings.Development
                      Handler.Home
+                     Handler.Signup
                      Handler.Buy
                      Handler.Stock
 
