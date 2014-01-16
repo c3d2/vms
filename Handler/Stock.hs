@@ -8,60 +8,51 @@ getStockR = do
   ps <- runDB $ selectList [] []
   defaultLayout $ do
     setTitle "TITLE HERE"
-    [whamlet|
-$if null ps
-  <p>NOTHING INSERT
-$else
-  <ul>
-    $forall Entity pId p <- ps
-      <li>
-        <a href=@{UpdateStockR pId}>#{stockIdent p}
-  <form action=@{NewStockR}>
-    <button>New
-    |]
+    $(widgetFile "stock")
 
 getNewStockR :: Handler Html
 getNewStockR = do
   ((_, widget), enctype) <- runFormGet $ productForm Nothing
   defaultLayout $ do
     setTitle "TITLE HERE"  
-    [whamlet|
-    <form method=post action=@{NewStockR} enctype=#{enctype}>
-      ^{widget}
-      <button>Submit
-    |]
+    $(widgetFile "new-product")
 
 postNewStockR :: Handler Html
 postNewStockR = do
-    ((res, widget), enctype) <- runFormPost $ productForm Nothing
-    case res of
-        FormSuccess p -> do
-            pId <- runDB $ insert p
-            redirect $ StockR
-        FormFailure i -> defaultLayout $ do
-            setTitle "ERROR"
-            [whamlet|
-$forall f <- i
-  #{f}
-<form method=post enctype=#{enctype}>
-    ^{widget}
-      <button>Submit
-            |]
+  ((res, widget), enctype) <- runFormPost $ productForm Nothing
+  case res of
+    FormSuccess p -> do
+      pId <- runDB $ insert p
+      redirect $ StockR
+    FormFailure errors -> defaultLayout $ do
+      setTitle "ERROR"
+      $(widgetFile "new-product")
 
 getUpdateStockR :: StockId -> Handler Html
 getUpdateStockR pId = do
   p <- runDB $ get pId
   ((_, widget), enctype) <- runFormGet $ productForm p
   defaultLayout $ do
-    setTitle "TITLE HERE"  
-    [whamlet|
-    <form method=post action=@{UpdateStockR pId} enctype=#{enctype}>
-      ^{widget}
-      <button>Submit
-    |]
+    setTitle "TITLE HERE"
+    $(widgetFile "update-product")
 
 postUpdateStockR :: StockId -> Handler Html
-postUpdateStockR = undefined
+postUpdateStockR pId = do
+  ((res, widget), enctype) <- runFormPost $ productForm Nothing
+  case res of
+    FormSuccess p -> do
+      pid <- runDB $ update pId
+        [ StockIdent =. stockIdent p
+        , StockPrice =. stockPrice p
+        , StockAmount =. stockAmount p
+        , StockUnit =. stockUnit p
+        , StockPicture =. stockPicture p
+        , StockDescription =. stockDescription p
+        ]
+      redirect $ StockR
+    FormFailure errors -> defaultLayout $ do
+      setTitle "ERROR"
+      $(widgetFile "update-product")
 
 productForm :: Maybe Stock -> Html -> MForm Handler (FormResult Stock, Widget)
 productForm p = renderTable $ productAForm p

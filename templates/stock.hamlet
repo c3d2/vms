@@ -1,0 +1,9 @@
+$if null ps
+  <p>NOTHING INSERT
+$else
+  <ul>
+    $forall Entity pId p <- ps
+      <li>
+        <a href=@{UpdateStockR pId}>#{stockIdent p}
+  <form action=@{NewStockR}>
+    <button>New

@@ -1,0 +1,3 @@
+<form method=post action=@{UpdateStockR pId} enctype=#{enctype}>
+  ^{widget}
+  <button>Submit
