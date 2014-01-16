@@ -22,9 +22,9 @@ postNewStockR = do
   ((res, widget), enctype) <- runFormPost $ productForm Nothing
   case res of
     FormSuccess p -> do
-      pId <- runDB $ insert p
+      _ <- runDB $ insert p
       redirect $ StockR
-    FormFailure errors -> defaultLayout $ do
+    _ -> defaultLayout $ do
       setTitle "ERROR"
       $(widgetFile "new-product")
 
@@ -38,10 +38,11 @@ getUpdateStockR pId = do
 
 postUpdateStockR :: StockId -> Handler Html
 postUpdateStockR pId = do
-  ((res, widget), enctype) <- runFormPost $ productForm Nothing
+  -- FIXME: care about csrf token
+  ((res, widget), enctype) <- runFormPostNoToken $ productForm Nothing
   case res of
     FormSuccess p -> do
-      pid <- runDB $ update pId
+      _ <- runDB $ update pId
         [ StockIdent =. stockIdent p
         , StockPrice =. stockPrice p
         , StockAmount =. stockAmount p
@@ -50,7 +51,7 @@ postUpdateStockR pId = do
         , StockDescription =. stockDescription p
         ]
       redirect $ StockR
-    FormFailure errors -> defaultLayout $ do
+    _ -> defaultLayout $ do
       setTitle "ERROR"
       $(widgetFile "update-product")
 
