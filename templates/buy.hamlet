@@ -1,5 +1,3 @@
-<h2>Buy Consume Die
-
 <ul>
     $forall Entity id stock <- stocks
         <li>

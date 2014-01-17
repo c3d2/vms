@@ -1,0 +1,32 @@
+html, body
+   background-color: red
+   color: yellow
+   margin: 0
+   text-align: center
+
+header
+  margin: 0 0 2em
+  text-align: left
+  background-color: yellow
+  color: red
+  line-height: 2em
+h1
+  margin: 0
+  padding: 0 1em 0 0.2em
+  font-size: 200%
+  font-weight: bold
+  text-transform: capitalize
+  background-color: yellow
+  color: red
+#authId
+  float: right
+#authId form
+  display: inline-block
+  margin: 0
+#authId input
+  font-size: 80%
+  padding: 1px 4px
+  margin: 0 0 0 1em
+
+#main
+  margin: 2em auto

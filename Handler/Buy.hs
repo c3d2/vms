@@ -11,6 +11,7 @@ getBuyR = do
     stocks <- runDB $ selectList [] []
     tokenWidget <- getTokenWidget
     defaultLayout $ do
+        setTitle "Buy Consume Then Die"
         $(widgetFile "buy")
 
 postBuyItemR :: StockId -> Handler Html

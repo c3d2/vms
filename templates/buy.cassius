@@ -1,0 +1,13 @@
+ul
+  margin: 0
+  max-width: 40em
+  text-align: left
+li
+  display: inline-block
+form
+  margin: 0
+
+input
+  margin: 1em 2em
+  width: 7em
+  word-wrap: break-word

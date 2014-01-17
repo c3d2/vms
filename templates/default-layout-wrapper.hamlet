@@ -15,9 +15,8 @@ $newline never
         <script>
           document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
     <body>
-        <div class="container">
+        <div .container>
             <header>
-              <h1>Vorratsmatenspeicherung
               <div #authId>
                 $maybe user <- muser
                   Hello, #{userIdent user} (#{userBalance user}€)
@@ -25,5 +24,6 @@ $newline never
                     <input type=submit value="Logout">
                 $nothing
                   Please log in!
-            <div id="main" role="main">
+              <h1>#{pageTitle pc}
+            <div .main role="main">
               ^{pageBody pc}
