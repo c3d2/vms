@@ -42,14 +42,7 @@ postUpdateStockR pId = do
   ((res, widget), enctype) <- runFormPostNoToken $ productForm Nothing
   case res of
     FormSuccess p -> do
-      _ <- runDB $ update pId
-        [ StockIdent =. stockIdent p
-        , StockPrice =. stockPrice p
-        , StockAmount =. stockAmount p
-        , StockUnit =. stockUnit p
-        , StockPicture =. stockPicture p
-        , StockDescription =. stockDescription p
-        ]
+      _ <- runDB $ replace pId p
       redirect $ StockR
     _ -> defaultLayout $ do
       setTitle "ERROR"
