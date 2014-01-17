@@ -31,15 +31,14 @@ postNewStockR = do
 getUpdateStockR :: StockId -> Handler Html
 getUpdateStockR pId = do
   p <- runDB $ get pId
-  ((_, widget), enctype) <- runFormGet $ productForm p
+  ((_, widget), enctype) <- runFormPost $ productForm p
   defaultLayout $ do
     setTitle "TITLE HERE"
     $(widgetFile "update-product")
 
 postUpdateStockR :: StockId -> Handler Html
 postUpdateStockR pId = do
-  -- FIXME: care about csrf token
-  ((res, widget), enctype) <- runFormPostNoToken $ productForm Nothing
+  ((res, widget), enctype) <- runFormPost $ productForm Nothing
   case res of
     FormSuccess p -> do
       _ <- runDB $ update pId
