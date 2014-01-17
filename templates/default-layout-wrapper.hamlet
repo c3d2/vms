@@ -20,7 +20,7 @@ $newline never
               <h1>Vorratsmatenspeicherung
               <div #authId>
                 $maybe user <- muser
-                  Hello, #{userIdent user} (#{userBalance user} €)
+                  Hello, #{userIdent user} (#{userBalance user}€)
                   <form action=@{AuthR LogoutR} method=POST>
                     <input type=submit value="Logout">
                 $nothing

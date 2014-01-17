@@ -8,6 +8,7 @@
 /signup SignupR GET POST
 
 /buy BuyR GET
+/buy/#StockId BuyItemR POST
 
 /stock StockR GET
 /stock/!new NewStockR GET POST

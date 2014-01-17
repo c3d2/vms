@@ -20,6 +20,7 @@ library
                      Settings
                      Settings.StaticFiles
                      Settings.Development
+                     Token
                      Handler.Home
                      Handler.Signup
                      Handler.Buy
@@ -74,6 +75,7 @@ library
                  , monad-logger                  >= 0.3        && < 0.4
                  , fast-logger                   >= 2.1        && < 2.2
                  , wai-logger                    >= 2.1        && < 2.2
+                 , http-types                    >= 0.8.3      && < 0.9
 
 executable         vms
     if flag(library-only)

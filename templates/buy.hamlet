@@ -3,5 +3,6 @@
 <ul>
     $forall Entity id stock <- stocks
         <li>
-            <form method=POST action=@{BuyR}>
-                <input type=submit name="id" value=#{stockIdent stock}>
+            <form method=POST action=@{BuyItemR id}>
+                <input type=submit value="#{stockIdent stock} (#{stockAmount stock}× #{stockPrice stock}€)">
+                ^{tokenWidget}
