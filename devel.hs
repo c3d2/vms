@@ -1,5 +1,5 @@
 {-# LANGUAGE PackageImports #-}
-import "PROJECTNAME" Application (getApplicationDev)
+import "vms" Application (getApplicationDev)
 import Network.Wai.Handler.Warp
     (runSettings, defaultSettings, settingsPort)
 import Control.Concurrent (forkIO)
