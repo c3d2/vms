@@ -1,6 +1,8 @@
-<ul>
-    $forall Entity id stock <- stocks
-        <li>
-            <form method=POST action=@{BuyItemR id}>
-                <input type=submit value="#{stockIdent stock} (#{stockAmount stock}× #{stockPrice stock}€)">
-                ^{tokenWidget}
+<section .buy>
+    <ul>
+        $forall Entity id stock <- stocks
+            <li .pure-button>
+                <form method=POST action=@{BuyItemR id}>
+                    <input type=submit value="#{stockPrice stock} €">
+                    ^{tokenWidget}
+                <span .stock-ident>#{stockIdent stock}

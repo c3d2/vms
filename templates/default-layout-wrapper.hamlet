@@ -15,15 +15,17 @@ $newline never
         <script>
           document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
     <body>
-        <div .container>
-            <header>
-              <div #authId>
-                $maybe user <- muser
-                  Hello, #{userIdent user} (#{userBalance user}€)
-                  <form action=@{AuthR LogoutR} method=POST>
-                    <input type=submit value="Logout">
-                $nothing
-                  Please log in!
-              <h1>#{pageTitle pc}
-            <div .main role="main">
-              ^{pageBody pc}
+        <header>
+            $maybe user <- muser
+                <div .user-head>
+                    <span .user-ident .pure-button>
+                        #{userIdent user}
+                    <span .user-balance .pure-button>
+                        #{userBalance user} €
+                    <form action=@{AuthR LogoutR} method=POST>
+                        <input .pure-button
+                            type=submit value="log out">
+            $nothing
+                <h1>Vorratsmatenspeicherung
+        <content role="main">
+            ^{pageBody pc}

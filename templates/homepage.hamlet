@@ -1,10 +1,17 @@
-<h2>#{usersLength}
-
-<ul>
-    $forall Entity id user <- users
-        <li>
-            <form method=POST action=@{HomeR}>
-                <input type=submit name="uid" value=#{userIdent user}>
-    <li>
-        <form method=GET action=@{SignupR}>
-            <input type=submit value="Sign up">
+<section .users-login>
+    <ul .content-grid>
+        <li .signup>
+            <form .pure-form
+                method=GET
+                action=@{SignupR}>
+                <input .pure-button .pure-button-primary
+                    type=submit
+                    value="Sign up">
+        $forall Entity id user <- users
+            <li .login>
+                <form .pure-form method=POST action=@{HomeR}>
+                    <input .pure-button
+                        type=submit
+                        name="uid"
+                        value=#{userIdent user}>
+        

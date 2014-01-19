@@ -1,13 +1,26 @@
-ul
-  margin: 0
-  max-width: 40em
-  text-align: left
-li
-  display: inline-block
-form
-  margin: 0
+.buy li
+    display:            inline-table
+    margin-bottom:      0.4em;
+    width:              3cm
+    height:             3cm
+    padding:            0
+    text-align:         left
+    
+.buy li > *
+    display:            table-row
+    height:             1.5cm
+    text-align:         center
+    
+.buy li > form
+    height: 100%
+    
+.buy input
+    width:              100%
+    height:             100%
+    background:         none
+    border:             none
+    font-size:          2em
 
-input
-  margin: 1em 2em
-  width: 7em
-  word-wrap: break-word
+.buy .stock-ident
+    white-space:        normal
+    font-size:          1.2em
