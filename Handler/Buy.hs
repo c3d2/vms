@@ -20,13 +20,17 @@ postBuyItemR :: StockId -> Handler Html
 postBuyItemR stockId = do
     validatePostToken
     Just uid <- maybeAuthId
+    extras <- getExtra
     runDB $ do
         Just stock <- get stockId
         Just user <- get uid
         let price = stockPrice stock
         update uid [UserBalance -=. price]
         update stockId [StockAmount -=. 1]
-        liftIO $ renderSendMailCustom "/usr/sbin/exim4" ["-t", "-f no-reply@c3d2.de"] (emptyMail $ Address Nothing "no-reply@c3d2.de")
+        let from = extraMailFrom extras
+            path = extraMailPath extras
+            options = fmap unpack $ extraMailOptions extras
+        liftIO $ renderSendMailCustom path options (emptyMail $ Address Nothing from)
             { mailTo = [Address Nothing (userEmail user)]
             , mailHeaders =
                 [ ("Subject", mkSubject (stockIdent stock) (stockPrice stock))
