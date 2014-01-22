@@ -12,7 +12,7 @@ getStockR = do
 
 getNewStockR :: Handler Html
 getNewStockR = do
-  ((_, widget), enctype) <- runFormGet $ productForm Nothing
+  ((_, widget), enctype) <- runFormPost $ productForm Nothing
   defaultLayout $ do
     setTitle "TITLE HERE"  
     $(widgetFile "new-product")
