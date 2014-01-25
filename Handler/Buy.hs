@@ -7,6 +7,7 @@ import Import
 import Token
 import Network.Mail.Mime
 import Data.Text as T
+import Control.Monad (when)
 
 getBuyR :: Handler Html
 getBuyR = do
@@ -27,16 +28,18 @@ postBuyItemR stockId = do
         let price = stockPrice stock
         update uid [UserBalance -=. price]
         update stockId [StockAmount -=. 1]
-        let from = extraMailFrom extras
-            path = extraMailPath extras
-            options = fmap unpack $ extraMailOptions extras
-        liftIO $ renderSendMailCustom path options (emptyMail $ Address Nothing from)
-            { mailTo = [Address Nothing (userEmail user)]
-            , mailHeaders =
-                [ ("Subject", mkSubject (stockIdent stock) (stockPrice stock))
-                ]
-            , mailParts = [[textPart]]
-            }
+        when (extraProduction extras) $ do
+            let from = extraMailFrom extras
+                path = extraMailPath extras
+                options = fmap unpack $ extraMailOptions extras
+            liftIO $ renderSendMailCustom path options (emptyMail $ Address Nothing from)
+                { mailTo = [Address Nothing (userEmail user)]
+                , mailHeaders =
+                    [ ("Subject", mkSubject (stockIdent stock) price)
+                    ]
+                , mailParts = [[textPart]]
+                }
+            liftIO $ putStrLn "Mail sent"
     lift $ putStrLn $ "$€¥ user " ++ show uid ++ " bought " ++ show stockId
 
     redirectWith status303 BuyR

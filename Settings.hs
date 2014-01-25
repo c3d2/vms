@@ -72,6 +72,7 @@ data Extra = Extra
     , extraMailPath :: FilePath
     , extraMailOptions :: [Text]
     , extraMailFrom :: Text
+    , extraProduction :: Bool
     } deriving Show
 
 parseExtra :: DefaultEnv -> Object -> Parser Extra
@@ -81,3 +82,4 @@ parseExtra _ o = Extra
     <*> o .: "mailpath"
     <*> o .: "mailoptions"
     <*> o .: "mailfrom"
+    <*> o .: "production"

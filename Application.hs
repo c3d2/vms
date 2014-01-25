@@ -31,6 +31,10 @@ import Handler.Signup
 import Handler.Buy
 import Handler.Stock
 
+-- extras for mail handling
+import Control.Monad (when)
+import System.Directory (doesFileExist)
+
 -- This line actually creates our YesodDispatch instance. It is the second half
 -- of the call to mkYesodData which occurs in Foundation.hs. Please see the
 -- comments there for more details.
@@ -78,6 +82,12 @@ makeFoundation conf = do
     runLoggingT
         (Database.Persist.runPool dbconf (runMigration migrateAll) p)
         (messageLoggerSource foundation logger)
+    let extras = appExtra conf
+        path = extraMailPath extras
+        prod = extraProduction extras
+    mailPathExists <- doesFileExist path
+    when (prod && not mailPathExists) $
+        error "In production you need to provide a valid mailpath in settings.yml"
 
     return foundation
 
