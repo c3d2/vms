@@ -1,9 +1,22 @@
 $if null ps
   <p>NOTHING INSERT
 $else
-  <ul>
-    $forall Entity pId p <- ps
-      <li>
-        <a href=@{UpdateStockR pId}>#{stockIdent p}
+  <table class="pure-table">
+    <thead>
+      <tr>
+        <th> Ident
+        <th> Price
+        <th> Unit
+        <th> Description
+        <th> Amount
+    <tbody>
+      $forall Entity pId p <- ps
+        <tr>
+          <td>
+            <a href=@{UpdateStockR pId}>#{stockIdent p}
+          <td> #{stockPrice p}
+          <td> #{stockUnit p}
+          <td> #{stockDescription p}
+          <td> #{stockAmount p}
   <form action=@{NewStockR}>
     <button>New
