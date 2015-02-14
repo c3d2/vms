@@ -45,38 +45,37 @@ library
                 EmptyDataDecls
                 NoMonomorphismRestriction
                 DeriveDataTypeable
+                ViewPatterns
 
-    build-depends: base                          >= 4          && < 5
-                 , yesod                         >= 1.2        && < 1.3
-                 , yesod-core                    >= 1.2        && < 1.3
-                 , yesod-auth                    >= 1.2        && < 1.3
-                 , yesod-static                  >= 1.2        && < 1.3
-                 , yesod-form                    >= 1.3        && < 1.4
-                 , bytestring                    >= 0.9        && < 0.11
-                 , text                          >= 0.11       && < 2.0
-                 , persistent                    >= 1.3        && < 1.4
-                 , persistent-postgresql         >= 1.3        && < 1.4
-                 , persistent-template           >= 1.3        && < 1.4
+    build-depends: base                          >= 4
+                 , yesod                         >= 1.4
+                 , yesod-core                    >= 1.4
+                 , yesod-auth                    >= 1.4
+                 , yesod-static                  >= 1.4
+                 , yesod-form                    >= 1.4
+                 , bytestring                    >= 0.10.4
+                 , text                          >= 1.2
+                 , persistent                    >= 2.1
+                 , persistent-postgresql         >= 2.1
+                 , persistent-template           >= 2.1
                  , template-haskell
-                 , hamlet                        >= 1.1        && < 1.2
-                 , shakespeare-css               >= 1.0        && < 1.1
-                 , shakespeare-js                >= 1.2        && < 1.3
-                 , shakespeare-text              >= 1.0        && < 1.1
-                 , hjsmin                        >= 0.1        && < 0.2
-                 , monad-control                 >= 0.3        && < 0.4
-                 , wai-extra                     >= 2.0        && < 2.1
-                 , yaml                          >= 0.8        && < 0.9
-                 , http-conduit                  >= 2.0        && < 2.1
-                 , directory                     >= 1.1        && < 1.3
-                 , warp                          >= 2.0        && < 2.1
+                 , hamlet                        >= 1.2
+                 , shakespeare                   >= 2.0
+                 , hjsmin                        >= 0.1
+                 , monad-control                 >= 0.3
+                 , wai-extra                     >= 2.0
+                 , yaml                          >= 0.8
+                 , http-conduit                  >= 2.1
+                 , directory                     >= 1.1
+                 , warp                          >= 2.0
                  , data-default
-                 , aeson                         >= 0.6        && < 0.7
-                 , conduit                       >= 1.0        && < 2.0
-                 , monad-logger                  >= 0.3        && < 0.4
-                 , fast-logger                   >= 2.1        && < 2.2
-                 , wai-logger                    >= 2.1        && < 2.2
-                 , http-types                    >= 0.8.3      && < 0.9
-                 , mime-mail                     >= 0.4.3 
+                 , aeson                         >= 0.8
+                 , conduit                       >= 1.2
+                 , monad-logger                  >= 0.3
+                 , fast-logger                   >= 2.1
+                 , wai-logger                    >= 2.1
+                 , http-types                    >= 0.8.5
+                 , mime-mail                     >= 0.4.5 
 
 executable         vms
     if flag(library-only)
@@ -98,7 +97,7 @@ test-suite test
 
     build-depends: base
                  , vms
-                 , yesod-test >= 1.2 && < 1.3
+                 , yesod-test >= 1.4
                  , yesod-core
                  , yesod
                  , persistent

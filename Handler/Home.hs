@@ -1,6 +1,10 @@
 {-# LANGUAGE TupleSections, OverloadedStrings #-}
 module Handler.Home where
 
+import Control.Monad (when)
+import Yesod (redirect)
+import Yesod.Auth (maybeAuthId)
+
 import Import
 
 -- This is a handler function for the GET request method on the HomeR
